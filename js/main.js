@@ -156,6 +156,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { passive: true });
 
+  // ---- Side WeChat Contact ----
+  const sideContactBtn = document.querySelector('.side-contact-btn');
+  const sideContactPanel = document.querySelector('.side-contact-panel');
+  const sideContactClose = document.querySelector('.side-contact-close');
+  if (sideContactBtn && sideContactPanel) {
+    // Auto pulse after 3s
+    setTimeout(() => sideContactBtn.classList.add('pulse'), 3000);
+    sideContactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sideContactPanel.classList.toggle('open');
+      sideContactBtn.classList.remove('pulse');
+    });
+    if (sideContactClose) {
+      sideContactClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sideContactPanel.classList.remove('open');
+      });
+    }
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.side-contact')) {
+        sideContactPanel.classList.remove('open');
+      }
+    });
+  }
+
   console.log('GT2.AI initialized successfully ✨');
 
 });
